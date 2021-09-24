@@ -8,7 +8,7 @@
     <?php
     define("num", 50);
     define("nmax", 100);
-    $min = 101;
+    $min = 1021;
     $max = 0;
     $total = 0;
 
