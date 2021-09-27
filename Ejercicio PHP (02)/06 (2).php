@@ -9,23 +9,26 @@
 <body>
     <code>
     <?php 
-    $almena = "**** ";
-    $linea = "*****";
+    $almena = "<img src='ladrillo.jpg' width='50' height='50'>";
+    $blanco = "<img src='blanco.jpg' width='50' height='50'>";
     $num = random_int(1,10);
-    echo"<p>";
+    echo"<div>";
     for ($i=0; $i < $num; $i++) { 
         echo $almena;
+        echo $blanco;
     }
-    echo"</p>";
-    echo"<p>";
+    echo"</div>";
+    echo"<div>";
     for ($i=0; $i < $num; $i++) { 
         echo $almena;
+        echo $blanco;
     }
-    echo"</p>";
+    echo"</div>";
     for ($i=0; $i < $num-1; $i++) { 
-        echo $linea;
+        echo $almena;
+        echo $almena;
     }
-    echo"****</p>";
+    echo $almena;
     ?>
     </code>
 </body>
