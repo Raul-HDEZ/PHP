@@ -24,6 +24,7 @@
 
         echo"<h3>Jugador 1 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Jugador 2</h3>";
         echo "<div style='font-size: 7em'>";
+        // Imprimimos los emoticonos del J1
         switch ($j1) {
             case $piedra:
                 echo PIEDRA1, "&nbsp";
@@ -35,6 +36,7 @@
                 echo TIJERAS, "&nbsp";
                 break;
         }
+        // Imprimimos los emoticonos del J2
         switch ($j2) {
             case $piedra:
                 echo PIEDRA2;
@@ -47,7 +49,7 @@
                 break;
         }
         echo "</div>";
-
+        // Decidimos quien ha ganado
         if ($j1 == $piedra ) {
             if ($j2 == $tijera) {
                 echo "<h3>Gana Jugador 1</h3>";
