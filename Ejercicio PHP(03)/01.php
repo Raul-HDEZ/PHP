@@ -53,7 +53,7 @@
             if($value < $max) {
                 break; 
             } else {
-                $max = $value;
+                $max = $key;
             }
         }
         return $max;
