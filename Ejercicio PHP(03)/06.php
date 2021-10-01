@@ -41,7 +41,10 @@
                 $name = $pais;
             }
         }
-        print("El pais con mas poblacion es: $name con $max habitantes");
+        print("El pais con mas poblacion es: $name con $max habitantes y sus ciudades son : <br>");
+        foreach ($ciudades[$name] as $value) {
+            echo $value . ", ";
+        }
 
     ?>
 </body>
