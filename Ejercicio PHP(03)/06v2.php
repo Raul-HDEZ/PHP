@@ -39,6 +39,20 @@
         array_multisort($poblacion, SORT_ASC, $paises);
         $ult = end($paises);
         print("el maximo de poblacion es ".end($ult));
+
+        /* OTRA FORMA DE HACERLO
+
+        function ordeapais($pais1, $pais2){
+            return ( $pais1['Poblacion'] - $pais2['Poblacion']);
+        }
+
+        y ordenas usando la funcion
+
+        uasort($pais,ordenapais);
+        
+        
+        */
     ?>
+
 </body>
 </html>
