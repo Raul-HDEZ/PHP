@@ -48,7 +48,7 @@
 
         y ordenas usando la funcion
 
-        uasort($pais,ordenapais);
+        uasort($pais,'ordenapais');
         
         
         */
