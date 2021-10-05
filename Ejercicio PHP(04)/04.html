@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title>
+</head>
+<body>
+    <form action="05.php" method="post">
+        <h3>Campos de texto</h3>
+        Nombre: <input type="text" name="nombre"> <br>
+        Contraseña: <input type="password" name="contraseña">
+        <hr>
+        <h3>Radio</h3>
+        Rojo <input type="radio" name="radio"> <br>
+        Naranja <input type="radio" name="radio"> <br>
+        Verde <input type="radio" name="radio">
+        <hr>
+        <h3>Checkbox</h3>
+        Quiero recibir publicidad <input type="checkbox" name="publi"> <br>
+        <h3>Multi Checkbox</h3>
+        Ingles <input type="checkbox" name="idioma"> Frances <input type="checkbox" name="idioma"> Aleman <input type="checkbox" name="idioma"> 
+        <hr>
+        <h3>Select</h3>
+        Simple <br>
+        Año de finalizacion de estudios <select name="ano">
+            <option value="2016" selected>2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+        </select> <br>
+        Multiple <br>
+        Ciudades <select name="ciudades" multiple>
+            <option value="Asturias">Asturias</option>
+            <option value="Gerona">Gerona</option>
+            <option value="Madrid">Madrid</option>
+            <option value="Sevilla">Sevila</option>
+        </select>
+        <hr>
+        <h3>Textarea</h3>
+        Escriba sus comentarios <textarea name="textarea" cols="30" rows="10">Este formulario es muy completo</textarea>
+        <hr>
+        <h3>Botones</h3>
+        <input type="reset" value="Resetear el formulario">
+        <input type="submit" value="Enviar formulario al servidor">
+    </form>
+</body>
+</html>
