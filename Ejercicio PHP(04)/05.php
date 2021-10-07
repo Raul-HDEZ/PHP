@@ -40,8 +40,6 @@
             return "Bienvenido Dña ";
         }else return "Bienvenida ";
     }
-    var_dump($_POST);
-    echo "<br>";
     echo damebienvenida($_POST) . recoge('nombre') . " " . recoge('apellidos') ." ";
     damehobies($_POST);
 
