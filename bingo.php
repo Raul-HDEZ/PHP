@@ -45,7 +45,7 @@
     }
     //checkeo que dos columnas consecutivas no tengas los huecos en el mismo sitio
     // por alguna razon no funciona correctamente
-    function checkma($matriz){
+    function checkma($matriz, $carton){
         for ($i=0; $i < 8 ; $i++) { 
             $coincidencias = 0;
             for ($d=0; $d < 3 ; $d++) { 
@@ -57,7 +57,6 @@
                 }
             }
             if ($coincidencias >= 2) {
-                $carton = generahuecos();
                 switch ($i) {
                     case 0:
                         $matriz[$i] = damearray(1,9,$carton[0]);
@@ -92,7 +91,21 @@
         }
         return $matriz;
     }
-
+    function checkfilas($matriz,$carton){
+        for ($i=0; $i < 3 ; $i++) { 
+            $huecos = 0;
+            for ($d=0; $d < 9 ; $d++) { 
+                if ($matriz[$d][$i] == null) {
+                   $huecos++;
+                }
+            }
+            if ($huecos > 4) {
+                generacarton($carton);
+                exit;
+            }
+        }
+        return $matriz;
+    }
     function ultimorecurso($matriz){
         for ($i=0; $i < 8 ; $i++) { 
             $coincidencias = 0;
@@ -105,7 +118,8 @@
                 }
             }
             if ($coincidencias >= 2) {
-                generacarton();
+                return false;
+                //generacarton();
                 exit;
             }
         }
@@ -124,8 +138,7 @@
         //}
         return $matriz;
     }
-    
-    function generahuecos(){
+
         //crea un array que indica el numero de huecos de cada columna
         $carton = array_fill(0, 9, 1);
         $rand = range(0,8);
@@ -138,10 +151,9 @@
         foreach ($arr as $value) {
             $carton[$value] = 2;
         }
-        return $carton;
-    }
-    function generacarton(){
-        $carton = generahuecos();
+    
+    function generacarton($carton){
+        //var_dump($carton);
         // generamos los arrays con esos huecos
         $matriz[] = damearray(1,9,$carton[0]);
         $matriz[] = damearray(10,19,$carton[1]);
@@ -153,12 +165,13 @@
         $matriz[] = damearray(70,79,$carton[7]);
         $matriz[] = damearray(80,90,$carton[8]);
 
-        //$matriz = checkma($matriz);
-        ultimorecurso($matriz);
+        $matriz = checkma($matriz, $carton);
+        $matriz = checkfilas($matriz, $carton);
+        //ultimorecurso($matriz);
         imprimircarton($matriz);
 
     }
-    generacarton();
+    generacarton($carton);
     ?>
 </body>
 </html>
