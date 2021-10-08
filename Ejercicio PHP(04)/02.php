@@ -72,6 +72,7 @@
             }
         }
         checkear($_POST);
+        formulario();
         echo "El resultado es : ". convertir($_POST). "<br>";
         echo "<input type='button' value='Volver a intentarlo' onClick='history.go(-1);'>";
         
