@@ -8,8 +8,9 @@
 </head>
 <body>
     <?php
-    //Genera un array de 3 entre $min y $max y deja $num huecos
+    
     function damearray($min, $max, $num){
+    //Genera un array de 3 entre $min y $max y deja $num huecos   
         $rand = range($min, $max);
         shuffle($rand);
         for ($i=0; $i < 3 ; $i++) { 
@@ -21,13 +22,11 @@
         for ($i=0; $i < $num; $i++) { 
             $arr[$hueco[$i]] = null;
         }
-        //for ($i=0; $i <$num ; $i++) { 
-        //    unset($arr[array_rand($arr,1)]);
-        //}
         return $arr;
     }
 
     function imprimircarton ($matriz){
+    // imprime la matriz del carton de bingo
         echo "<table border='1px'>";
 
         for ($d=0; $d <3 ; $d++) { 
@@ -43,11 +42,13 @@
 
 
     }
-    //checkeo que dos columnas consecutivas no tengas los huecos en el mismo sitio
-    // por alguna razon no funciona correctamente
-    function checkma($matriz, $carton){
+    
+    function checkcolumna($matriz, $carton){
+    // Checkeo que dos columnas consecutivas no tengan coincidencias en el mismo sitio
+    // y si es asi creo una columna nueva con los parametros de la que sustituye
         for ($i=0; $i < 8 ; $i++) { 
             $coincidencias = 0;
+            // Deteccion de coincidencias
             for ($d=0; $d < 3 ; $d++) { 
                 if ($matriz[$i][$d] != null && $matriz[$i+1][$d] != null) {
                     $coincidencias++;
@@ -56,34 +57,36 @@
                     $coincidencias++;
                 }
             }
+            // Si hay 2 o mas coincidencias creo una nueva columna con la funcion damearray()
+            // con los parametros que tenia la columna anterior
             if ($coincidencias >= 2) {
-                switch ($i) {
+                switch ($i+1) {
                     case 0:
-                        $matriz[$i] = damearray(1,9,$carton[0]);
+                        $matriz[$i+1] = damearray(1,9,$carton[0]);
                         break;
                     case 1:
-                        $matriz[$i] = damearray(10,19,$carton[1]);
+                        $matriz[$i+1] = damearray(10,19,$carton[1]);
                         break;
                     case 2:
-                        $matriz[$i] = damearray(20,29,$carton[2]);
+                        $matriz[$i+1] = damearray(20,29,$carton[2]);
                         break;
                     case 3:
-                        $matriz[$i] = damearray(30,39,$carton[3]);
+                        $matriz[$i+1] = damearray(30,39,$carton[3]);
                         break;
                     case 4:
-                        $matriz[$i] = damearray(40,49,$carton[4]);
+                        $matriz[$i+1] = damearray(40,49,$carton[4]);
                         break;
                     case 5:
-                        $matriz[$i] = damearray(50,59,$carton[5]);
+                        $matriz[$i+1] = damearray(50,59,$carton[5]);
                         break;
                     case 6:
-                        $matriz[$i] = damearray(60,69,$carton[6]);
+                        $matriz[$i+1] = damearray(60,69,$carton[6]);
                         break;
                     case 7:
-                        $matriz[$i] = damearray(70,79,$carton[7]);
+                        $matriz[$i+1] = damearray(70,79,$carton[7]);
                         break;
                     case 8:
-                        $matriz[$i] = damearray(80,90,$carton[8]);
+                        $matriz[$i+1] = damearray(80,90,$carton[8]);
                         break;
                 }
             }
@@ -91,7 +94,10 @@
         }
         return $matriz;
     }
+
     function checkfilas($matriz,$carton){
+    // Checkeo que en las filas del carton de bingo no haya mas de 4 huecos
+    // si es asi genero un carton nuevo con generacarton()
         for ($i=0; $i < 3 ; $i++) { 
             $huecos = 0;
             for ($d=0; $d < 9 ; $d++) { 
@@ -106,39 +112,10 @@
         }
         return $matriz;
     }
-    function ultimorecurso($matriz){
-        for ($i=0; $i < 8 ; $i++) { 
-            $coincidencias = 0;
-            for ($d=0; $d < 3 ; $d++) { 
-                if ($matriz[$i][$d] != null && $matriz[$i+1][$d] != null) {
-                    $coincidencias++;
-                }
-                if ($matriz[$i][$d] == null && $matriz[$i+1][$d] == null) {
-                    $coincidencias++;
-                }
-            }
-            if ($coincidencias >= 2) {
-                return false;
-                //generacarton();
-                exit;
-            }
-        }
-
-        //for ($i=0; $i < 3 ; $i++) { 
-        //    $huecos = 0;
-        //    for ($d=0; $d < 9 ; $d++) { 
-        //        if ($matriz[$d][$i]) {
-        //            $huecos++;
-        //        }
-        //    }
-        //    if ($huecos >4) {
-        //        generacarton();
-        //        exit;
-        //    }
-        //}
-        return $matriz;
-    }
-
+        //
+        //              CREO UN ARRAY QUE ESPECIFICA EL NUMERO DE HUECOS
+        //                      QUE TIENE QUE TENER CADA COLUMNA
+        //
         //crea un array que indica el numero de huecos de cada columna
         $carton = array_fill(0, 9, 1);
         $rand = range(0,8);
@@ -165,7 +142,8 @@
         $matriz[] = damearray(70,79,$carton[7]);
         $matriz[] = damearray(80,90,$carton[8]);
 
-        $matriz = checkma($matriz, $carton);
+        // Checkeo que el carton generado es valido
+        $matriz = checkcolumna($matriz, $carton);
         $matriz = checkfilas($matriz, $carton);
         //ultimorecurso($matriz);
         imprimircarton($matriz);
