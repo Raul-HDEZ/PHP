@@ -103,33 +103,33 @@ table {
             // Si hay 2 o mas coincidencias creo una nueva columna con la funcion damearray()
             // con los parametros que tenia la columna anterior
             if ($coincidencias >= 2) {
-                switch ($i+1) {
+                switch ($i) {
                     case 0:
-                        $matriz[$i+1] = damearray(1,9,$carton[0]);
+                        $matriz[$i] = damearray(1,9,$carton[0]);
                         break;
                     case 1:
-                        $matriz[$i+1] = damearray(10,19,$carton[1]);
+                        $matriz[$i] = damearray(10,19,$carton[1]);
                         break;
                     case 2:
-                        $matriz[$i+1] = damearray(20,29,$carton[2]);
+                        $matriz[$i] = damearray(20,29,$carton[2]);
                         break;
                     case 3:
-                        $matriz[$i+1] = damearray(30,39,$carton[3]);
+                        $matriz[$i] = damearray(30,39,$carton[3]);
                         break;
                     case 4:
-                        $matriz[$i+1] = damearray(40,49,$carton[4]);
+                        $matriz[$i] = damearray(40,49,$carton[4]);
                         break;
                     case 5:
-                        $matriz[$i+1] = damearray(50,59,$carton[5]);
+                        $matriz[$i] = damearray(50,59,$carton[5]);
                         break;
                     case 6:
-                        $matriz[$i+1] = damearray(60,69,$carton[6]);
+                        $matriz[$i] = damearray(60,69,$carton[6]);
                         break;
                     case 7:
-                        $matriz[$i+1] = damearray(70,79,$carton[7]);
+                        $matriz[$i] = damearray(70,79,$carton[7]);
                         break;
                     case 8:
-                        $matriz[$i+1] = damearray(80,90,$carton[8]);
+                        $matriz[$i] = damearray(80,90,$carton[8]);
                         break;
                 }
             }
@@ -186,6 +186,8 @@ table {
         $matriz[] = damearray(80,90,$carton[8]);
 
         // Checkeo que el carton generado es valido
+        $matriz = checkcolumna($matriz, $carton);
+        // Lo paso otra vez por si probalidad la columna generada fuera igual que la anterior
         $matriz = checkcolumna($matriz, $carton);
         $matriz = checkfilas($matriz, $carton);
         //ultimorecurso($matriz);
