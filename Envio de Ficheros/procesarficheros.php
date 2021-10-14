@@ -24,9 +24,7 @@
             if (count($_POST) == 0 ){
                    $mensaje= "  Error: se supera el tamaño máximo de un petición POST ";   
                 }
-            if (isset($_FILES['archivo1']['name']) || isset($_FILES['archivo2']['name'])) {
-                # code...
-            }
+            
         // "image/jpg"  "image/png" para la estension
     ?>
 </body>
