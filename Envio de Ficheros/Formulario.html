@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subida de Ficheros</title>
+</head>
+<body>
+    <h2>Envio de Ficheros</h2>
+    <p>Seleccione las imagenes a subir:</p><br>
+    <form enctype="multipart/form-data" action="procesarficheros.php" method="post">
+        
+    Seleccione el archivo a subir <input type="file" name="archivo1">
+    <inputtype="hidden"name="MAX_FILE_SIZE"value="200000"/>
+    <br><br>
+
+    Seleccione el archivo a subir <input type="file" name="archivo2">
+    <inputtype="hidden"name="MAX_FILE_SIZE"value="200000"/>
+    <br><br>
+    <input type="submit" value="Enviar">
+    </form>
+
+</body>
+</html>
