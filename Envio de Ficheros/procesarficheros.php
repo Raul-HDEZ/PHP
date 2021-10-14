@@ -20,10 +20,16 @@
                 8 => 'Una extensión PHP evito la subida del archivo'  // extensión PHP
             ];
 
-            $mensaje = '';// No se recibe nada, error al enviar el POST, se supera post_max_size
+            if ($_SERVER['REQUEST_METHOD'] == "GET") {
+                include_once "./Formulario.html";
+            } else {
+                $mensaje = '';// No se recibe nada, error al enviar el POST, se supera post_max_size
             if (count($_POST) == 0 ){
                    $mensaje= "  Error: se supera el tamaño máximo de un petición POST ";   
                 }
+            }
+
+            
             
         // "image/jpg"  "image/png" para la estension
     ?>
