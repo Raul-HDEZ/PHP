@@ -11,15 +11,7 @@
     <p>Seleccione las imagenes a subir:</p><br>
     <form enctype="multipart/form-data" action="procesarficheros.php" method="post">
         
-    Seleccione el archivo a subir <input type="file" name="archivo1">
-    <inputtype="hidden"name="MAX_FILE_SIZE"value="200000"/>
-    <br><br>
-
-    Seleccione el archivo a subir <input type="file" name="archivo2">
-    <inputtype="hidden"name="MAX_FILE_SIZE"value="200000"/>
-    <br><br>
-    
-    Seleccione el archivo a subir <input type="file" name="archivo2">
+    Seleccione el archivo a subir <input type="file" name="archivos[]" accept="image/*" multiple>
     <inputtype="hidden"name="MAX_FILE_SIZE"value="200000"/>
     <br><br>
     <input type="submit" value="Enviar">
