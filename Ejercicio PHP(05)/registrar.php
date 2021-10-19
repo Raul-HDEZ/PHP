@@ -8,52 +8,70 @@
 </head>
 <body>
     <form action="registrar.php" method="post">
-        Nombre <input type="text" name="name" id="name" onblur=checkname()><h7 id="errornombre" style="color:red"></h7><br><br>
-        E-mail <input type="email" name="email" id="email" onblur=checkemail()><h7 id="erroremail" style="color:red"></h7><br><br>
+        Nombre <input type="text" name="name" id="name" onblur="checkname(); checkall()"><h7 id="errornombre" style="color:red"></h7><br><br>
+        E-mail <input type="email" name="email" id="email" onblur="checkemail(); checkall()"><h7 id="erroremail" style="color:red"></h7><br><br>
         Contraseña <input type="password" name="pass" id="pass"><h7 id="errorpass" style="color:red"></h7><br><br> 
-        Repite la contraseña <input type="password" name="pass-repetida" id="pass2" onblur=check()><br><br>
-        <input type="submit" value="Enviar" id="enviar">
+        Repite la contraseña <input type="password" name="pass-repetida" id="pass2" oninput="check(); checkall()"><br><br>
+        <input type="submit" value="Enviar" id="enviar" disabled>
 
         <script>
             function check(){
                 var error = document.getElementById("errorpass")
                 var pass = document.getElementById("pass").value;
                 var pass2 = document.getElementById("pass2").value;
-                var send = document.getElementById("enviar")
                 if (pass != pass2) {
                     error.innerHTML = " Las contraseñas no coinciden";
-                    send.disabled = true;
+                    apaga();
+                    return false;
                 } else {
                     error.innerHTML = "";
-                    send.disabled = false;
+                    enciende();
+                    return true;
                 }
             }
 
             function checkname(){
                 var error = document.getElementById("errornombre");
                 var name = document.getElementById("name").value;
-                var send = document.getElementById("enviar");
                 name = name.toUpperCase();
                 if (name!="") {
                     error.innerHTML = "";
-                    send.disabled = false;
+                    return true;
                 } else {
                     error.innerHTML = " No puede estar vacio";
-                    send.disabled = true;
+                    apaga();
+                    return false;
                 }
             }
 
             function checkemail(){
                 var error = document.getElementById("erroremail");
                 var email = document.getElementById("email").value;
-                var send = document.getElementById("enviar");
                 if (email!="") {
                     error.innerHTML = "";
-                    send.disabled = false;
+                    return true;
                 } else {
                     error.innerHTML = " No puede estar vacio";
-                    send.disabled = true;
+                    apaga();
+                    return false;
                 }
+            }
+
+            function checkall(){
+                if (check() == true || checkname() == true || checkemail()== true ) {
+                    enciende();
+                } else {
+                }
+            }
+
+            function apaga(){
+                btn = document.getElementById("enviar");
+                btn.disabled = false;
+            }
+
+            function enciende(){
+                btn = document.getElementById("enviar");
+                btn.disabled = true;
             }
         </script>
 
