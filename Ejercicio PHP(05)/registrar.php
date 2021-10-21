@@ -8,11 +8,12 @@
 </head>
 <body>
     <form action="registrar.php" method="post">
-        Nombre <input type="text" name="name" id="name" onblur="checkname(); checkall()"><h7 id="errornombre" style="color:red"></h7><br><br>
-        E-mail <input type="email" name="email" id="email" onblur="checkemail(); checkall()"><h7 id="erroremail" style="color:red"></h7><br><br>
-        Contraseña <input type="password" name="pass" id="pass"><h7 id="errorpass" style="color:red"></h7><br><br> 
-        Repite la contraseña <input type="password" name="pass-repetida" id="pass2" oninput="check(); checkall()"><br><br>
+        Nombre <input type="text" name="name" id="name" require onblur="checkname(); checkall()"><h7 id="errornombre" style="color:red"></h7><br><br>
+        E-mail <input type="email" name="email" id="email" require onblur="checkemail(); checkall()"><h7 id="erroremail" style="color:red"></h7><br><br>
+        Contraseña <input type="password" name="pass" id="pass" require><h7 id="errorpass" style="color:red"></h7><br><br> 
+        Repite la contraseña <input type="password" name="pass2" id="pass2" require oninput="check(); checkall()"><br><br>
         <input type="submit" value="Enviar" id="enviar" disabled>
+        <br><br>
 
         <script>
             function check(){
@@ -25,7 +26,11 @@
                     return false;
                 } else {
                     error.innerHTML = "";
-                    enciende();
+                    if (checkname() == false || checkemail() == false) {
+                        apaga();
+                    } else{
+                        enciende();
+                    }
                     return true;
                 }
             }
@@ -57,49 +62,62 @@
                 }
             }
 
-            function checkall(){
-                if (check() == true || checkname() == true || checkemail()== true ) {
-                    enciende();
-                } else {
-                }
-            }
-
             function apaga(){
                 btn = document.getElementById("enviar");
-                btn.disabled = false;
+                btn.disabled = true;
             }
 
             function enciende(){
                 btn = document.getElementById("enviar");
-                btn.disabled = true;
+                btn.disabled = false;
             }
         </script>
 
         <?php
             function validar_clave($clave){
-                if(strlen($clave) < 6){
-                   $error_clave = "La clave debe tener al menos 6 caracteres";
-                   return $error_clave;
-                }
-                if(strlen($clave) > 8){
-                   $error_clave = "La clave no puede tener más de 8 caracteres";
-                   return $error_clave;
+                $error_clave = "";
+                if(strlen($clave) < 8){
+                   $error_clave .= "La clave debe tener al menos 8 caracteres ";
                 }
                 if (!preg_match('`[a-z]`',$clave)){
-                   $error_clave = "La clave debe tener al menos una letra minúscula";
-                   return $error_clave;
+                   $error_clave .= "La clave debe tener al menos una letra minúscula ";
                 }
                 if (!preg_match('`[A-Z]`',$clave)){
-                   $error_clave = "La clave debe tener al menos una letra mayúscula";
-                   return $error_clave;
+                   $error_clave .= "La clave debe tener al menos una letra mayúscula ";
                 }
                 if (!preg_match('`[0-9]`',$clave)){
-                   $error_clave = "La clave debe tener al menos un caracter numérico";
-                   return $error_clave;
+                   $error_clave .= "La clave debe tener al menos un caracter numérico ";
                 }
-                $error_clave = "";
-                return true;
-             } 
+                if (!preg_match('@[^\w]@', $clave)) {
+                    $error_clave .= "La clave debe tener al menos un caracter especial ";
+                }
+                return $error_clave;
+             }
+
+             function hayform(){
+                 if ( empty($_POST['name']) || empty($_POST['email']) || empty($_POST['pass']) || empty($_POST['pass2']) ) {
+                     return false;
+                 }else return true;
+             }
+
+             function samepass($pass1, $pass2){
+                if ($pass1 == $pass2) {
+                    return true;
+                }else return false;
+             }
+
+             if ($_SERVER['REQUEST_METHOD'] == "GET") {
+                include_once "registrar.php";
+             } else {
+                include_once "registrar.php";
+                $error = (hayform()) ? "" : "El formulario no se ha enviado correctamente " ;
+                $error .= validar_clave($_POST['pass']);
+                $error .= (samepass($_POST['pass'], $_POST['pass2'])) ? "" : "Las contraseñas no coinciden " ;
+                if ($error == "") {
+                    $msg = "Usuario registrado correctamente";
+                    print($msg);
+                }else print($error);
+             }
         ?>
     </form>
 </body>
