@@ -54,7 +54,7 @@
         <option value="decB">Decrementa b</option>
         <option value="cierra">Cierra sesión</option>
       </select>
-      <input type="submit" value="OK">
+      <input type="submit" value="OK,">
     </form>
   </body>
 </html>
