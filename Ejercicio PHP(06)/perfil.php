@@ -77,7 +77,7 @@
         }
 
         if(isset($_COOKIE['edad'])){
-            formRelleno();
+            //formRelleno();
         } else {
             formVacio();
         }
