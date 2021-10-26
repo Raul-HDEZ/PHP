@@ -25,7 +25,7 @@
 
         if ($_SESSION['intentos']==0) {
             session_unset();
-            header("Location: ./adivina.php");;
+            header("Location: ./adivina.php");
         }
 
         if ($_POST['num'] == $_SESSION['adivina']) {
