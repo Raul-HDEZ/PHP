@@ -19,7 +19,11 @@
         }
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if ($_POST['boton']== "Anotar") {
-                $_SESSION['pedido'][$_POST['fruta']] = $_POST['cantidad'] ;
+                if (empty($_SESSION['pedido'][$_POST['fruta']])) {
+                    $_SESSION['pedido'][$_POST['fruta']] = $_POST['cantidad'] ;
+                } else {
+                    $_SESSION['pedido'][$_POST['fruta']] += $_POST['cantidad'] ;
+                }
                 include 'formulario.php';
             }else {
                 include 'terminado.php';
