@@ -8,7 +8,6 @@
 </head>
 <body>
     <?php
-    var_dump($_SESSION);
     $dinero = $_SESSION['dinero'];
     ?>
     <form action="index.php" method="POST">

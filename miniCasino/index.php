@@ -14,8 +14,7 @@
     }
     if (($_SERVER['REQUEST_METHOD'] == "GET" && !empty($_GET['dinero']))) {
         $_SESSION['dinero'] = $_GET['dinero'];
-        var_dump($_SESSION);
-        //include 'formulario.php';    
+        include 'formulario.php';    
     }
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if ($_POST['boton']== "Apostar") {
@@ -23,18 +22,30 @@
             include 'formulario.php'; 
         }else {
             session_destroy();
-            include 'index.php';
+            include 'entrada.html';
         }
     }
 
     function apuesta(){
-        $apuesta = $_POST['apuesta'];
-        $tipo = $_POST['tipo'];
-        $aleatorio = (rand(0,31)%2 == 0) ? "par" : "impar" ;
-        if ($aleatorio == $tipo) {
-            $_SESSION['dinero'] += $apuesta;
+        if (empty($_POST['apuesta']) || empty($_POST['tipo'])) {
+            print('No has seleccionado nada');
         }else {
-            $_SESSION['dinero'] += $apuesta;
+            if ($_POST['apuesta'] > $_SESSION['dinero']) {
+                print('No tienes suficiente dinero');
+            }else {
+                $apuesta = $_POST['apuesta'];
+                $tipo = $_POST['tipo'];
+                $aleatorio = (rand(0,31)%2 == 0) ? "par" : "impar" ;
+                print("Elegistes $tipo <br>");
+                print("Salio $aleatorio <br>");
+                if ($aleatorio == $tipo) {
+                    $_SESSION['dinero'] += $apuesta;
+                    print("ganas $apuesta");
+                }else {
+                    $_SESSION['dinero'] -= $apuesta;
+                    print("pierdes $apuesta");
+                }
+            }
         }
     }
     ?>
