@@ -8,7 +8,6 @@
 </head>
 
 <?php 
-session_start();
 $navegador = 0;
     if (isset($_COOKIE['nave'])) {
         $navegador = $_COOKIE["nave"];
@@ -18,7 +17,6 @@ $navegador = 0;
     $total = file_get_contents('./accesos.txt');
     $total++;
     file_put_contents('./accesos.txt',$total);
-    session_destroy();
     ?>
 
 <body>
