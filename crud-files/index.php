@@ -28,7 +28,7 @@ else {
     if (  isset($_POST['orden'])){
          switch($_POST['orden']) {
              case "Nuevo"    : accionPostAlta(); break;
-             case "Modificar": accionPostModificar(); break;
+             case "Modificar": accionPostModificar($_GET['id']); break;
              case "Detalles":; // No hago nada
          }
     }
