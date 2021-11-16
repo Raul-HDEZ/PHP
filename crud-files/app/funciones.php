@@ -37,7 +37,6 @@ function cargarDatostxt(){
 //Vuelca los datos a un fichero de texto
 function volcarDatostxt($tvalores){
     file_put_contents(FILEUSER, '',);
-//file_put_contents(FILEUSER, $persona, FILE_APPEND);
 foreach ($tvalores as $value) {
     $entrada = $value[0]."|".$value[1]."|".$value[2]."|".$value[3];
     file_put_contents(FILEUSER, $entrada. "\n", FILE_APPEND);

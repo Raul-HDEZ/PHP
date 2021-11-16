@@ -12,10 +12,17 @@
 <h1>GESTIÓN DE USUARIOS versión 1.0</h1>
 </div>
 <div id="content">
+<script>
+function pregunta(){
+    if (confirm('¿Estas seguro de terminar?')){
+       document.formulario.submit()
+    }
+} 
+</script>
 <?= $contenido ?>
-<form>
+<form id="formulario">
 <input type="submit" name="orden" value="Nuevo">
-<input type="submit" name="orden" value="Terminar">
+<input type="submit" name="orden" value="Terminar" onclick="pregunta()">
 </form>
 </div>
 </div>
