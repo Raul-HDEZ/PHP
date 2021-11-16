@@ -52,8 +52,16 @@ function accionPostModificar($id){
 
 function accionPostAlta(){
     limpiarArrayEntrada($_POST); //Evito la posible inyección de código
-    $nuevo = [ $_POST['nombre'],$_POST['login'],$_POST['clave'],$_POST['comentario']];
-    $_SESSION['tuser'][]= $nuevo; 
+    $esta = false;
+    foreach ($_SESSION['tuser'] as $value) {
+        if ($value[1]==$_POST['login']) {
+            $esta = true;
+        }
+    }
+    if (!$esta) {
+        $nuevo = [ $_POST['nombre'],$_POST['login'],$_POST['clave'],$_POST['comentario']];
+        $_SESSION['tuser'][]= $nuevo; 
+    }
 }
 
 
