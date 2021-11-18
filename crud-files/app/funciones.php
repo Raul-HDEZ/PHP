@@ -134,7 +134,10 @@ function mostrarDatos (){
 
 // Función para limpiar todos elementos de un array
 function limpiarArrayEntrada(array &$entrada){
-  // Sin implementar
-    
+    $salida=[];
+    foreach ($entrada as $key => $value) {
+        $salida[$key] = trim(htmlspecialchars($value));
+    }
+    $entrada = $salida;    
 }
 
