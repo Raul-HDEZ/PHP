@@ -22,10 +22,10 @@ function mostrartablabicis($tabla){
     foreach ($tabla as $value) {
         if ($value->__get('operativa')==1) {
             echo "<tr>";
-            echo "<td>".$value->__get('id')."</td>";
-            echo "<td>".$value->__get('coordx')."</td>";
-            echo "<td>".$value->__get('coordy')."</td>";
-            echo "<td>".$value->__get('bateria')."%</td>";
+            echo "<td>".$value->id."</td>";
+            echo "<td>".$value->coordx."</td>";
+            echo "<td>".$value->coordy."</td>";
+            echo "<td>".$value->bateria."%</td>";
             echo "</tr>";
         }
     }
@@ -36,7 +36,7 @@ function bicimascercana($x,$y,$tabla){
     $menor = 999999999999999999999999999999999999999999999999999999999999999;
     $res = "";
     foreach ($tabla as $bici) {
-        if ($bici->distancia($x,$y)< $menor && $bici->__get('operativa')==1) {
+        if ($bici->distancia($x,$y)< $menor && $bici->operativa==1) {
             $menor = $bici->distancia($x,$y);
             $res = $bici;
         }
