@@ -7,12 +7,12 @@ class Bicicleta{
     private $bateria; // Carga de la batería en tanto por ciento (entero)
     private $operativa; // Estado de la bicleta ( true operativa- false no disponible)
 
-    public function __construct($a,$b,$c,$d,$e){
-        $this->id = $a;
-        $this->coordx = $b;
-        $this->coordy = $c;
-        $this->bateria = $d;
-        $this->operativa = $e;
+    public function __construct($id,$coordx,$coordy,$bateria,$operativa){
+        $this->id = $id;
+        $this->coordx = $coordx;
+        $this->coordy = $coordy;
+        $this->bateria = $bateria;
+        $this->operativa = $operativa;
     }
 
 
@@ -30,11 +30,11 @@ class Bicicleta{
 
     public function __toString()
     {
-        return "id: ". $this->__get('id') ." Bateria: ".$this->__get('bateria');
+        return "id: ". $this->id ." Bateria: ".$this->bateria;
     }
 
     public  function distancia($x,$y){
-        return sqrt(pow($x - $this->__get('coordx'),2)+pow($y - $this->__get('coordy'),2));
+        return sqrt(pow($x - $this->coordx,2)+pow($y - $this->coordy,2));
     }
 }
 ?>

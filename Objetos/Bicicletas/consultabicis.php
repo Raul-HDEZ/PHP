@@ -18,13 +18,30 @@ function cargabicis(){
 }
 
 function mostrartablabicis($tabla){
+    echo "<table><th>ID</th><th>CoordxX</th><th>CoordY</th><th>Bateria</th>";
     foreach ($tabla as $value) {
-        echo $value;
+        if ($value->__get('operativa')==1) {
+            echo "<tr>";
+            echo "<td>".$value->__get('id')."</td>";
+            echo "<td>".$value->__get('coordx')."</td>";
+            echo "<td>".$value->__get('coordy')."</td>";
+            echo "<td>".$value->__get('bateria')."%</td>";
+            echo "</tr>";
+        }
     }
+    echo "</table>";
 }
 
-function bicimascercana($x,$y){
-
+function bicimascercana($x,$y,$tabla){
+    $menor = 999999999999999999999999999999999999999999999999999999999999999;
+    $res = "";
+    foreach ($tabla as $bici) {
+        if ($bici->distancia($x,$y)< $menor && $bici->__get('operativa')==1) {
+            $menor = $bici->distancia($x,$y);
+            $res = $bici;
+        }
+    }
+    return $res;
 }
 
 ?>
