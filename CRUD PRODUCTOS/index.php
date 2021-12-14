@@ -32,7 +32,3 @@ else {
 $contenido .= mostrarDatos();
 // Muestro la página principal
 include_once "app/layout/principal.php";
-
-
-
-

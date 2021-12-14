@@ -1,13 +1,13 @@
 <?php
 include_once 'app/config.php';
-include_once 'app/AccesoDatos.php';
+include_once 'app/AccesoDatos2.php';
 
 
 
 // MUESTRA TODOS LOS USUARIOS
 function mostrarDatos (){
     
-    $titulos = [ "Nombre","login","Password","Comentario"];
+    $titulos = [ "Descripcion","Producto_no","Precio_actual","Stock_disponible"];
     $msg = "<table>\n";
      // Identificador de la tabla
     $msg .= "<tr>";
@@ -17,16 +17,16 @@ function mostrarDatos (){
     $msg .= "</tr>";
     $auto = $_SERVER['PHP_SELF'];
     $db = AccesoDatos::getModelo();
-    $tuser = $db->getUsuarios();
-    foreach ($tuser as $user) {
+    $tproduct = $db->getProductos();
+    foreach ($tproduct as $product) {
         $msg .= "<tr>";
-        $msg .= "<td>$user->nombre</td>";
-        $msg .= "<td>$user->login</td>";
-        $msg .= "<td>$user->password</td>";
-        $msg .= "<td>$user->comentario</td>";
-        $msg .="<td><a href=\"#\" onclick=\"confirmarBorrar('$user->nombre','$user->login');\" >Borrar</a></td>\n";
-        $msg .="<td><a href=\"".$auto."?orden=Modificar&id=$user->login\">Modificar</a></td>\n";
-        $msg .="<td><a href=\"".$auto."?orden=Detalles&id=$user->login\" >Detalles</a></td>\n";
+        $msg .= "<td>$product->DESCRIPCION</td>";
+        $msg .= "<td>$product->PRODUCTO_NO</td>";
+        $msg .= "<td>$product->PRECIO_ACTUAL</td>";
+        $msg .= "<td>$product->STOCK_DISPONIBLE</td>";
+        $msg .="<td><a href=\"#\" onclick=\"confirmarBorrar('$product->DESCRIPCION','$product->PRODUCTO_NO');\" >Borrar</a></td>\n";
+        $msg .="<td><a href=\"".$auto."?orden=Modificar&id=$product->PRODUCTO_NO\">Modificar</a></td>\n";
+        $msg .="<td><a href=\"".$auto."?orden=Detalles&id=$product->PRODUCTO_NO\" >Detalles</a></td>\n";
         $msg .="</tr>\n";
         
     }
@@ -51,4 +51,3 @@ function limpiarArrayEntrada(array &$entrada){
         $entrada[$key] = limpiarEntrada($value);
     }
 }
-
