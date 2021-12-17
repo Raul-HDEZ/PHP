@@ -34,6 +34,8 @@ class pedidoController{
 				
 				if($save && $save_linea){
 					$_SESSION['pedido'] = "complete";
+					header("Location:".base_url.'carrito/delete_all');
+
 				}else{
 					$_SESSION['pedido'] = "failed";
 				}
