@@ -34,7 +34,6 @@ class pedidoController{
 				
 				if($save && $save_linea){
 					$_SESSION['pedido'] = "complete";
-					header("Location:".base_url.'carrito/delete_all');
 
 				}else{
 					$_SESSION['pedido'] = "failed";
@@ -61,6 +60,7 @@ class pedidoController{
 			
 			$pedido_productos = new Pedido();
 			$productos = $pedido_productos->getProductosByPedido($pedido->id);
+			unset($_SESSION['carrito']);
 		}
 		require_once 'views/pedido/confirmado.php';
 	}
