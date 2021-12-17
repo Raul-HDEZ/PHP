@@ -74,7 +74,7 @@ class usuarioController{
 		if(isset($_SESSION['admin'])){
 			unset($_SESSION['admin']);
 		}
-		
+		session_destroy();
 		header("Location:".base_url);
 	}
 	
