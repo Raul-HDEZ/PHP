@@ -12,8 +12,9 @@ if (isset ($_GET['nombre']) && isset($_GET['passwd']) ){
 
 // Accedo al Modelo
 $conexdb = AccesoDatos::getModelo();
-if ($cliente = $conexdb->getLogin($_GET['nombre'], $_GET['passwd'])) {
+if ($cliente=$conexdb->getLogin($_GET['nombre'], $_GET['passwd'])) {
     $total =0;
+    $conexdb->entrada($cliente->cod_cliente);
     $resultados = $conexdb->getPedidos($cliente->cod_cliente);
     foreach ($resultados as $pedido) {
         $total += $pedido->precio;

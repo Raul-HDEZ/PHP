@@ -36,6 +36,7 @@ class AccesoDatos
         //Consultas
         $this->stmt_pedidos  = $this->dbh->prepare("select * from pedidos where cod_cliente =:COD_CLIENTE ");
         $this->stmt_login   = $this->dbh->prepare("select * from clientes where nombre=:NOMBRE and clave=:CLAVE");
+        $this->stmt_entrada   = $this->dbh->prepare("update clientes set veces = veces + 1 where cod_cliente=:COD_CLIENTE");
     }
 
     // Cierro la conexión anulando todos los objectos relacioanado con la conexión PDO (stmt)
@@ -75,6 +76,11 @@ class AccesoDatos
         }else return false;
     }
     
+    public function entrada($cod){
+        $this->stmt_entrada->bindParam(':COD_CLIENTE', $cod);
+        $this->stmt_entrada->execute();
+        return true;
+    }
     // Evito que se pueda clonar el objeto. (SINGLETON)
     public function __clone()
     {
