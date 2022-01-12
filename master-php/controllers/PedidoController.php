@@ -1,5 +1,6 @@
 <?php
 require_once 'models/Pedido.php';
+require_once 'models/Usuario.php';
 
 class pedidoController{
 	
@@ -34,7 +35,6 @@ class pedidoController{
 				
 				if($save && $save_linea){
 					$_SESSION['pedido'] = "complete";
-
 				}else{
 					$_SESSION['pedido'] = "failed";
 				}
@@ -60,6 +60,7 @@ class pedidoController{
 			
 			$pedido_productos = new Pedido();
 			$productos = $pedido_productos->getProductosByPedido($pedido->id);
+			//modificacion en clase por alberto
 			unset($_SESSION['carrito']);
 		}
 		require_once 'views/pedido/confirmado.php';
@@ -87,6 +88,11 @@ class pedidoController{
 			$pedido = new Pedido();
 			$pedido->setId($id);
 			$pedido = $pedido->getOne();
+
+			//Sacar el dato del usuario
+			$usuario = new Usuario();
+			$usuario -> setId($pedido->usuario_id);
+			$usuario = $usuario->getOne();
 			
 			// Sacar los poductos
 			$pedido_productos = new Pedido();

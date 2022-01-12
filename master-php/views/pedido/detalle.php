@@ -16,6 +16,12 @@
 			<br/>
 		<?php endif; ?>
 
+		<!--agregue estas linea-->
+		<h3>Datos del Cliente</h3>
+		Id Usuario: <?= $usuario-> id ?>  <br/>
+		Nombre: <?= $usuario-> nombre." ". $usuario->apellidos ?>  <br/>
+		Email: <?= $usuario-> email ?>  <br/><br/>
+
 		<h3>Dirección de envio</h3>
 		Provincia: <?= $pedido->provincia ?>   <br/>
 		Cuidad: <?= $pedido->localidad ?> <br/>

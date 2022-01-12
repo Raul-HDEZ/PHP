@@ -104,7 +104,59 @@ class Usuario{
 		
 		return $result;
 	}
+
+	//agregue esta funcion
+	public function getAll(){
+		$usuarios = $this->db->query("SELECT * FROM usuarios ORDER BY id DESC");
+		return $usuarios;
+	}
 	
+	//agregue esta funcion
+	public function edit(){
+		$sql = "UPDATE usuarios SET nombre='{$this->getNombre()}', apellidos='{$this->getApellidos()}', email='{$this->getEmail()}', password='{$this->getPassword()}', rol='{$this->getRol()}', imagen='{$this->getImagen()}' ";
+		
+		if($this->getImagen() != null){
+			$sql .= ", imagen='{$this->getImagen()}'";
+		}
+		
+		$sql .= " WHERE id={$this->id};";
+		
+		
+		$save = $this->db->query($sql);
+		
+		$result = false;
+		if($save){
+			$result = true;
+		}
+		return $result;
+	}
+
+	//agregue esta funcion
+	public function delete(){
+		$sql = "DELETE FROM usuarios WHERE id={$this->id}";
+		$delete = $this->db->query($sql);
+		
+		$result = false;
+		if($delete){
+			$result = true;
+		}
+		return $result;
+	}
+
+	/*public function getOne(){
+		$usuario= $this->db->query("SELECT * FROM usuarios WHERE id = {$this->getId()}");
+		return $usuario->fetch_object();
+	}*/
 	
-	
+
+	// consulta con sentencia precompilada
+	public function getOne(){
+		$sql = "SELECT * FROM usuarios WHERE id = ?";
+		$stmt = $this-> db -> prepare($sql);
+		$id = $this->getId();
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		return $result -> fetch_object();
+	}
 }

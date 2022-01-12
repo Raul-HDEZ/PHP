@@ -40,6 +40,8 @@
 				</tr>
 			<?php endwhile; ?>
 		</table>
+
+		<!--agregado por alberto en clase-->
 		<div class="delete-carrito">
 			<a href="<?=base_url?>" class="button button-delete button-green">Aceptar</a>
 		</div>

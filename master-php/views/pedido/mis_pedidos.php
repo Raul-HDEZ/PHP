@@ -6,6 +6,7 @@
 <table>
 	<tr>
 		<th>Nº Pedido</th>
+		<th>Id Usuario</th>
 		<th>Coste</th>
 		<th>Fecha</th>
 		<th>Estado</th>
@@ -17,6 +18,9 @@
 		<tr>
 			<td>
 				<a href="<?= base_url ?>pedido/detalle&id=<?= $ped->id ?>"><?= $ped->id ?></a>
+			</td>
+			<td>
+				<?= $ped->usuario_id ?> 
 			</td>
 			<td>
 				<?= $ped->coste ?> $

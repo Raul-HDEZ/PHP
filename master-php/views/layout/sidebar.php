@@ -28,6 +28,8 @@
 
 		<ul>
 			<?php if(isset($_SESSION['admin'])): ?>
+				<!--agrego la linea 32-->
+				<li><a href="<?=base_url?>usuario/gestion">Gestionar Usuario</a></li>
 				<li><a href="<?=base_url?>categoria/index">Gestionar categorias</a></li>
 				<li><a href="<?=base_url?>producto/gestion">Gestionar productos</a></li>
 				<li><a href="<?=base_url?>pedido/gestion">Gestionar pedidos</a></li>
@@ -35,6 +37,11 @@
 			
 			<?php if(isset($_SESSION['identity'])): ?>
 				<li><a href="<?=base_url?>pedido/mis_pedidos">Mis pedidos</a></li>
+				<!-- he agregado esta condicion para que aparezca esta opcion en el sidebar de user normal	-->
+				<?php if(!isset($_SESSION['admin'])):?>
+					<li><a href="<?=base_url?>usuario/registro">Gestionar mis Datos</a></li>
+				<?php endif; ?>
+				
 				<li><a href="<?=base_url?>usuario/logout">Cerrar sesión</a></li>
 			<?php else: ?> 
 				<li><a href="<?=base_url?>usuario/registro">Registrate aqui</a></li>
