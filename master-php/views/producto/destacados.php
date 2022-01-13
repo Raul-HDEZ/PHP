@@ -10,11 +10,10 @@
 			<?php endif; ?>
 			<h2><?=$product->nombre?></h2>
 		</a>
-		<p><?=$product->precio?>$
+		<p><?=$product->precio?> $
 		<!--Muestro si esta de oferta-->
 		<?php if ($product->oferta == "si"):?>
-				 OFERTA 
-				<a href="<?= base_url ?>carrito/add&id=<?= $product->id ?>" class="orange button">Comprar</a>
+				<a href="<?= base_url ?>carrito/add&id=<?= $product->id ?>" class="orange button">Oferta - Comprar</a>
 				<?php else :?>
 					<!--Cambio el boton cuando no hay stock-->
 					<?php if ($product->stock > 0):?>
