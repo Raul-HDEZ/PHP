@@ -36,7 +36,8 @@ class carritoController{
 			$producto = $producto->getOne();
 
 			// Añadir al carrito
-			// se le agrego al carrito la condicion que si el stock es mayor que cero se agregara el producto en caso contrario no hara nada
+			// Añado si el stock es mayor que cero se agregara el producto en caso contrario no hara nada
+			//								↓↓↓↓↓↓↓↓↓
 			if(is_object($producto) && $producto->stock > 0){
 				$_SESSION['carrito'][] = array(
 					"id_producto" => $producto->id,

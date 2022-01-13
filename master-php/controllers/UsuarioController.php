@@ -12,7 +12,7 @@ class usuarioController{
 		require_once 'views/usuario/registro.php';
 	}
 
-	//agregue esta funcion
+	//Gestion de usuarios
 	public function gestion(){
 		Utils::isAdmin();
 		
@@ -23,7 +23,7 @@ class usuarioController{
 	}
 	
 
-	//agregue esta
+	//Crear Usuario
 	public function crear(){
 		Utils::isAdmin();
 		require_once 'views/usuario/crear.php';
@@ -96,8 +96,6 @@ class usuarioController{
 						move_uploaded_file($file['tmp_name'], 'uploads/images/'.$filename);
 					}
 				}
-
-				//esto tambien se agrego
 				if(isset($_GET['id'])){
 					$id = $_GET['id'];
 					$usuario->setId($id);
@@ -105,7 +103,7 @@ class usuarioController{
 					$save = $usuario->edit();
 				}else{
 					$save = $usuario->save();
-				}//hasta aqui
+				}
 
 				if($save){
 					$_SESSION['register'] = "complete";
@@ -155,12 +153,16 @@ class usuarioController{
 			unset($_SESSION['admin']);
 		}
 
-		//modificacion en clase por alberto
+		//Se borra el carrito cuando el ususario cierra sesion
+		if(isset($_SESSION['carrito'])){
+			unset($_SESSION['carrito']);
+		}
+		
 		session_destroy();
 		header("Location:".base_url);
 	}
 
-	//agregue esta funcion
+	//Editar Usuario
 	public function editar(){
 		Utils::isAdmin();
 		if(isset($_GET['id'])){
@@ -180,7 +182,7 @@ class usuarioController{
 	}
 
 
-	//agregada
+	//Funcion Eliminar Usuario
 	public function eliminar(){
 		Utils::isAdmin();
 		
@@ -204,4 +206,4 @@ class usuarioController{
 
 	
 
-} // fin clase
+}

@@ -16,7 +16,7 @@
 			<br/>
 		<?php endif; ?>
 
-		<!--agregue estas linea-->
+		<!--Añado los datos del cliente-->
 		<h3>Datos del Cliente</h3>
 		Id Usuario: <?= $usuario-> id ?>  <br/>
 		Nombre: <?= $usuario-> nombre." ". $usuario->apellidos ?>  <br/>
