@@ -28,7 +28,6 @@
 
 		<ul>
 			<?php if(isset($_SESSION['admin'])): ?>
-				<!--agrego la linea 32-->
 				<li><a href="<?=base_url?>usuario/gestion">Gestionar usuarios</a></li>
 				<li><a href="<?=base_url?>categoria/index">Gestionar categorias</a></li>
 				<li><a href="<?=base_url?>producto/gestion">Gestionar productos</a></li>
