@@ -248,8 +248,16 @@ button, .button{
 }
 
 .button-red{
+    display: block;
+    border-radius: 2px;
+    width: auto;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
     background: red;
-     border: 1px solid #cf1717;
+    border: 1px solid darkred;
+    cursor:pointer;
 }
 
 label, 

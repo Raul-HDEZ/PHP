@@ -15,11 +15,11 @@
 					<h2><?= $product->nombre ?></h2>
 				</a>
 				<p><?= $product->precio ?></p>
-				<!--se agrego estas condiciones php para cuando no haya stock-->
+				<!--Cambio el boton cuando no hay stock-->
 				<?php if ($product->stock > 0):?>
 				<a href="<?= base_url ?>carrito/add&id=<?= $product->id ?>" class="button">Comprar</a>
 				<?php else :?>
-				<a href="#" class="button-red">No Disponible</a>
+				<a href="" class="button-red">Sin Stock</a>
 				<?php endif ?>
 			</div>
 		<?php endwhile; ?>
