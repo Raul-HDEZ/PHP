@@ -14,7 +14,12 @@
 					<?php endif; ?>
 					<h2><?= $product->nombre ?></h2>
 				</a>
-				<p><?= $product->precio ?></p>
+				<p><?= $product->precio ?>
+				<!--Muestro si esta de oferta-->
+				<?php if ($product->oferta == "si"):?>
+				🔶 OFERTA 🔶
+				<?php endif ?>
+				</p>
 				<!--Cambio el boton cuando no hay stock-->
 				<?php if ($product->stock > 0):?>
 				<a href="<?= base_url ?>carrito/add&id=<?= $product->id ?>" class="button">Comprar</a>

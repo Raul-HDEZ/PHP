@@ -260,6 +260,17 @@ button, .button{
     cursor:pointer;
 }
 
+.orange{
+    background-color: orangered;
+    border: 1px solid darkred;
+}
+
+.oferta{
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #444;
+}
+
 label, 
 input[type="button"],
 input[type="submit"],
