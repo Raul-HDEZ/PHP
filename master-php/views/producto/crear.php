@@ -31,6 +31,19 @@
 				</option>
 			<?php endwhile; ?>
 		</select>
+		<label for="oferta">Producto de Oferta</label>
+		<?php if(isset($pro) && is_object($pro)): ?>
+			<select name="oferta">
+			<option value="si" <?= $pro->oferta == "si" ? 'selected' : '' ;?>>si</option>
+			<option value="no" <?= $pro->oferta == "no" ? 'selected' : '' ;?>>no</option>
+		</select>
+		<?php else: ?>
+			<select name="oferta">
+			<option value="si">si</option>
+			<option value="no">no</option>
+		</select>
+		<?php endif; ?>
+		
 		
 		<label for="imagen">Imagen</label>
 		<?php if(isset($pro) && is_object($pro) && !empty($pro->imagen)): ?>
