@@ -11,17 +11,18 @@
 			<h2><?=$product->nombre?></h2>
 		</a>
 		<p><?=$product->precio?> $
-		<!--Muestro si esta de oferta-->
-		<?php if ($product->oferta == "si"):?>
+
+		<?php if ($product->stock > 0):?>
+			<?php if ($product->oferta == "si"):?>
+				<!--Muestro si esta de oferta-->
 				<a href="<?= base_url ?>carrito/add&id=<?= $product->id ?>" class="orange button">Oferta - Comprar</a>
 				<?php else :?>
-					<!--Cambio el boton cuando no hay stock-->
-					<?php if ($product->stock > 0):?>
-					<a href="<?= base_url ?>carrito/add&id=<?= $product->id ?>" class="button">Comprar</a>
-					<?php else :?>
-					<a href="" class="button-red">Sin Stock</a>
-					<?php endif ?>
-				<?php endif ?>
-				</p>
+				<a href="<?= base_url ?>carrito/add&id=<?= $product->id ?>" class="button">Comprar</a>
+			<?php endif ?>
+		<?php else :?>
+			<!--Cambio el boton cuando no hay stock-->
+			<a href="" class="button-red">Sin Stock</a>
+		<?php endif ?>
+		</p>
 	</div>
 <?php endwhile; ?>
