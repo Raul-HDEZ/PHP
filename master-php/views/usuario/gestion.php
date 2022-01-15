@@ -26,6 +26,7 @@
 		<th>EMAIL</th>
 		<th>ROL</th>
 		<th>TOTAL</th>
+		<th>PEDIDOS PENDIENTES</th>
 	</tr>
 	<?php while($user = $usuarios->fetch_object()): ?>
 		<tr>
@@ -34,8 +35,8 @@
 			<td><?=$user->apellidos;?></td>
 			<td><?=$user->email;?></td>
 			<td><?=$user->rol;?></td>
-			<td><?=$user->imagen;?></td>
-			
+			<td><?= ($user->Coste_Pedidos == NULL)? 0 : $user->Coste_Pedidos ?> $</td>
+			<td><?=$user->Pendientes;?></td>
 			
 			<td>
 				<a href="<?=base_url?>usuario/editar&id=<?=$user->id?>" class="button button-gestion">Editar</a>

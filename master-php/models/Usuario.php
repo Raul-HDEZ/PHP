@@ -107,7 +107,8 @@ class Usuario{
 
 	//agregue esta funcion
 	public function getAll(){
-		$usuarios = $this->db->query("SELECT * FROM usuarios ORDER BY id DESC");
+		//$usuarios = $this->db->query("SELECT * FROM usuarios ORDER BY id DESC");
+		$usuarios = $this->db->query("SELECT u.id, nombre, apellidos, email, rol, (SELECT sum(coste) FROM `pedidos` WHERE usuario_id = u.id) AS 'Coste_Pedidos', (SELECT count(*) FROM `pedidos` WHERE usuario_id = u.id AND estado = 'confirm') AS 'Pendientes' FROM `usuarios` u ORDER by id DESC ");
 		return $usuarios;
 	}
 	
@@ -133,14 +134,27 @@ class Usuario{
 
 	//agregue esta funcion
 	public function delete(){
-		$sql = "DELETE FROM usuarios WHERE id={$this->id}";
-		$delete = $this->db->query($sql);
+		
+		$sql2 = "DELETE FROM pedidos WHERE usuario_id = {$this->id}";	
+		$sql3 = "DELETE FROM usuarios WHERE id={$this->id}";
+		
+		$this->db->query($sql2);
+		$delete = $this->db->query($sql3);
 		
 		$result = false;
 		if($delete){
 			$result = true;
 		}
 		return $result;
+	}
+
+	public function checkPedidos(){
+		$control = false;
+		$query =  $this->db->query("SELECT * FROM `pedidos` WHERE usuario_id = '{$this->getId()}' AND estado = 'sended';");
+		if($query->num_rows == 0){
+			$control = true;
+		}
+		return $control;
 	}
 
 	/*public function getOne(){

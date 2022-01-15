@@ -26,9 +26,11 @@
 		<label for="email">Email</label>
 		<input type="text" name="email" value="<?= isset($user) && is_object($user) ? $user->email : ''; ?>" />
 
+		<!--Solo muestro la contraseña en el registro y no al administrador-->
+		<?php if (!isset($edit) && !isset($user) && !is_object($user)) : ?>
 		<label for="password">Password</label>
 		<input type="text" name="password" value="<?= isset($user) && is_object($user) ? $user->password : ''; ?>" />
-
+		<?php endif; ?>
 		<label for="rol">Rol</label>
 		<input type="text" name="rol" value="<?= isset($user) && is_object($user) ? $user->rol : ''; ?>" />
 

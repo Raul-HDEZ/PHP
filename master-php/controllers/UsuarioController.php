@@ -190,10 +190,15 @@ class usuarioController{
 			$id = $_GET['id'];
 			$usuario = new Usuario();
 			$usuario->setId($id);
-			
-			$delete = $usuario->delete();
-			if($delete){
-				$_SESSION['delete'] = 'complete';
+
+			$pedidosCheck = $usuario->checkPedidos();
+			if($pedidosCheck){
+				$delete = $usuario->delete();
+				if($delete){
+					$_SESSION['delete'] = 'complete';
+				}else{
+					$_SESSION['delete'] = 'failed';
+				}
 			}else{
 				$_SESSION['delete'] = 'failed';
 			}
