@@ -1,6 +1,5 @@
 <?php
-include_once "Pedido.php";
-include_once "Cliente.php";
+include_once "Producto.php";
 include_once "config.php";
 
 /*
@@ -34,9 +33,8 @@ class AccesoDatos
         $this->dbh = new PDO($dsn, DB_USER, DB_PASSWD);
 
         //Consultas
-        $this->stmt_pedidos  = $this->dbh->prepare("select * from pedidos where cod_cliente =:COD_CLIENTE ");
-        $this->stmt_login   = $this->dbh->prepare("select * from clientes where nombre=:NOMBRE and clave=:CLAVE");
-        $this->stmt_entrada   = $this->dbh->prepare("update clientes set veces = veces + 1 where cod_cliente=:COD_CLIENTE");
+        $this->stmt_no_pedidos = $this->dbh->prepare("select * from PRODUCTOS where PRODUCTO_NO NOT IN (SELECT PRODUCTO_NO FROM PEDIDOS) " );
+        $this->stmt_descuento = $this->dbh->prepare("update productos set precio_actual = precio_actual * 1,10 where producto_no=:PRODUCTO_NO");
     }
 
     // Cierro la conexión anulando todos los objectos relacioanado con la conexión PDO (stmt)
@@ -54,33 +52,23 @@ class AccesoDatos
 
     // SELECT Devuelvo la lista de Producto
 
-    public function getPedidos($cod): array
+    public function getPedidos(): array
     {
         $tproduct = [];
-        $this->stmt_pedidos->setFetchMode(PDO::FETCH_CLASS, 'Pedido');
-        $this->stmt_pedidos->bindParam(':COD_CLIENTE', $cod);
-        if ($this->stmt_pedidos->execute()) {
-            while ($pro = $this->stmt_pedidos->fetch()) {
+        $this->stmt_no_pedidos->setFetchMode(PDO::FETCH_CLASS, 'Producto');
+        if ($this->stmt_no_pedidos->execute()) {
+            while ($pro = $this->stmt_no_pedidos->fetch()) {
                 $tproduct[] = $pro;
             }
         }
         return $tproduct;
     }
 
-    public function getLogin($nombre,$clave){
-        $this->stmt_login->setFetchMode(PDO::FETCH_CLASS, 'Cliente');
-        $this->stmt_login->bindParam(':NOMBRE', $nombre);
-        $this->stmt_login->bindParam(':CLAVE', $clave);
-        if ($this->stmt_login->execute()) {
-            return $this->stmt_login->fetch();
-        }else return false;
+    public function descuento($cod){
+        $this->stmt_descuento->bindParam(':PRODUCTO_NO', $cod);
+        return $this->stmt_descuento->execute();
     }
-    
-    public function entrada($cod){
-        $this->stmt_entrada->bindParam(':COD_CLIENTE', $cod);
-        $this->stmt_entrada->execute();
-        return true;
-    }
+
     // Evito que se pueda clonar el objeto. (SINGLETON)
     public function __clone()
     {
