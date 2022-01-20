@@ -153,5 +153,38 @@ class Producto{
 		}
 		return $result;
 	}
+
+	// Gestion de Productos
+
+	public function getVentas(){
+		$ventas = $this->db->query("SELECT sum(unidades) FROM lineas_pedidos");
+		$num = $ventas->fetch_assoc();
+		return $num['sum(unidades)'];
+	}
+
+	public function getMasVendido(){
+		$mas_vendido = $this->db->query("SELECT producto_id, SUM(`unidades`)as total FROM `lineas_pedidos` Group BY `producto_id` ORDER BY total DESC");
+		$id = $mas_vendido->fetch_assoc();
+		$id = $id['producto_id'];
+		$resultado = self::getName($id);
+		return $resultado;
+	}
+	
+	public function getSinVentas(){
+		$sin_ventas = $this->db->query("SELECT * FROM productos WHERE `id` NOT IN (SELECT `producto_id` from lineas_pedidos) ");
+		return $sin_ventas;
+	}
+
+	public function getSinStock(){
+		$sin_stock = $this->db->query("SELECT * FROM productos WHERE stock=0");
+		return $sin_stock;
+	}
+
+	public function getName($id){
+		$name = $this->db->query("SELECT nombre FROM productos WHERE id=$id");
+		$name = $name->fetch_assoc();
+		return $name['nombre'];
+	}
+
 	
 }
