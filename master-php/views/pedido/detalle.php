@@ -29,6 +29,7 @@
 
 		<h3>Datos del pedido:</h3>
 		Estado: <?=Utils::showStatus($pedido->estado)?> <br/>
+		Fecha: <?= $pedido->fecha ?> a las  <?= $pedido->hora ?> <br/>
 		Número de pedido: <?= $pedido->id ?>   <br/>
 		Total a pagar: <?= $pedido->coste ?> $ <br/>
 		Productos:

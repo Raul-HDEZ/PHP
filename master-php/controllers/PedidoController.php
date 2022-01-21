@@ -57,11 +57,13 @@ class pedidoController{
 			$pedido->setUsuario_id($identity->id);
 			
 			$pedido = $pedido->getOneByUser();
+
 			
 			$pedido_productos = new Pedido();
 			$productos = $pedido_productos->getProductosByPedido($pedido->id);
 			//Se borra el carrito
 			unset($_SESSION['carrito']);
+
 		}
 		require_once 'views/pedido/confirmado.php';
 	}
@@ -132,6 +134,20 @@ class pedidoController{
 			header("Location:".base_url);
 		}
 	}
-	
+
+	// Gestion de pedidos
+
+	public function cancelar(){
+		if(isset($_GET['id'])){
+			$id = $_GET['id'];
+			$pedido = new Pedido();
+			$pedido->setId($id);
+			$pedi= $pedido->getOne();
+			if ($pedi->estado != "sended") {
+				$pedido->delete();
+			}
+			header("Location:".base_url.'pedido/mis_pedidos');		
+		}
+	}
 	
 }

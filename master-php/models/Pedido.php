@@ -98,6 +98,15 @@ class Pedido{
 		$producto = $this->db->query("SELECT * FROM pedidos WHERE id = {$this->getId()}");
 		return $producto->fetch_object();
 	}
+
+	// Gestion de Pedidos
+
+	public function delete(){
+		$lineas = $this->db->query("DELETE FROM lineas_pedidos WHERE pedido_id = {$this->getId()}");
+		$producto = $this->db->query("DELETE FROM pedidos WHERE id = {$this->getId()}");
+	}
+
+	// Fin Gestion de Pedidos
 	
 	public function getOneByUser(){
 		$sql = "SELECT p.id, p.coste FROM pedidos p "
