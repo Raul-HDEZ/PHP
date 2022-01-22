@@ -1,6 +1,12 @@
 <?php
+
+use Dompdf\Dompdf;
+
 require_once 'models/Pedido.php';
 require_once 'models/Usuario.php';
+// Generar PDFS
+
+// Fin Generar PDFS
 
 class pedidoController{
 	
@@ -63,7 +69,7 @@ class pedidoController{
 			$productos = $pedido_productos->getProductosByPedido($pedido->id);
 			//Se borra el carrito
 			unset($_SESSION['carrito']);
-
+	
 		}
 		require_once 'views/pedido/confirmado.php';
 	}
@@ -149,5 +155,15 @@ class pedidoController{
 			header("Location:".base_url.'pedido/mis_pedidos');		
 		}
 	}
+
+	// Fin Gestion de pedidos
+
+	// Generar PDFS
+
+	public function albaran(){
+		
+	}
+
+	// Fin Generar PDFS
 	
 }
