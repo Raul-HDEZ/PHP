@@ -188,20 +188,33 @@ class pedidoController{
 		//Comenzamos a generar el html y el css que usaremos para generar el pdf
 		ob_start();
 		?>
-		<h3>Datos del cliente</h3>
-		Nombre: <?= $usuario->nombre." ".$usuario->apellidos ?><br>
-		Email: <?=$usuario->email ?><br><br>
-		<h3>Dirección de envio</h3>
-		Provincia: <?= $pedido->provincia ?>   <br/>
-		Cuidad: <?= $pedido->localidad ?> <br/>
-		Direccion: <?= $pedido->direccion ?>   <br/><br/>
 
-		<h3>Datos del pedido:</h3>
-		Estado: <?=Utils::showStatus($pedido->estado)?> <br/>
-		Número de pedido: <?= $pedido->id ?>   <br/>
-		Fecha del pedido: <?=$pedido->fecha ?><br>
-		Total a pagar: <?= $pedido->coste ?> $ <br/>
-		Productos:
+		<table>
+			<tr>
+				<td>
+					<h3>Datos del Cliente</h3>
+					Id Usuario: <?= $usuario-> id ?>  <br/>
+					Nombre: <?= $usuario-> nombre." ". $usuario->apellidos ?>  <br/>
+					Email: <?= $usuario-> email ?>  <br/><br/>
+				</td>
+
+				<td>
+					<h3>Dirección de envio</h3>
+					Provincia: <?= $pedido->provincia ?>   <br/>
+					Cuidad: <?= $pedido->localidad ?> <br/>
+					Direccion: <?= $pedido->direccion ?>   <br/><br/>
+				</td>
+
+				<td>
+					<h3>Datos del pedido:</h3>
+					Estado: <?=Utils::showStatus($pedido->estado)?> <br/>
+					Fecha: <?= $pedido->fecha ?> a las  <?= $pedido->hora ?> <br/>
+					Número de pedido: <?= $pedido->id ?>   <br/>
+					Total a pagar: <?= $pedido->coste ?> $ <br/>
+				</td>
+			</tr>
+		</table>
+		
 		<table>
 			<tr>
 				<th>Nombre</th>
