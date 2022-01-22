@@ -1,11 +1,12 @@
 <?php
 
 use Dompdf\Dompdf;
+use FontLib\Table\Type\name;
 
 require_once 'models/Pedido.php';
 require_once 'models/Usuario.php';
 // Generar PDFS
-
+require_once 'vendor/autoload.php';
 // Fin Generar PDFS
 
 class pedidoController{
@@ -162,6 +163,73 @@ class pedidoController{
 
 	public function albaran(){
 		
+		if(isset($_GET['id'])){
+			$id = $_GET['id'];
+
+			// Sacar el pedido
+			$pedido = new Pedido();
+			$pedido->setId($id);
+			$pedido = $pedido->getOne();
+
+			// Sacar la información del usuario
+			$usuario = new Usuario();
+			$usuario->setId($pedido->usuario_id);
+			$usuario = $usuario->getOne();
+
+			// Sacar los poductos
+			$pedido_productos = new Pedido();
+			$productos = $pedido_productos->getProductosByPedido($id);
+
+		}else{
+			header('Location:'.base_url.'pedido/mis_pedidos');
+		}
+
+
+		//Comenzamos a generar el html y el css que usaremos para generar el pdf
+		ob_start();
+		?>
+		<h3>Datos del cliente</h3>
+		Nombre: <?= $usuario->nombre." ".$usuario->apellidos ?><br>
+		Email: <?=$usuario->email ?><br><br>
+		<h3>Dirección de envio</h3>
+		Provincia: <?= $pedido->provincia ?>   <br/>
+		Cuidad: <?= $pedido->localidad ?> <br/>
+		Direccion: <?= $pedido->direccion ?>   <br/><br/>
+
+		<h3>Datos del pedido:</h3>
+		Estado: <?=Utils::showStatus($pedido->estado)?> <br/>
+		Número de pedido: <?= $pedido->id ?>   <br/>
+		Fecha del pedido: <?=$pedido->fecha ?><br>
+		Total a pagar: <?= $pedido->coste ?> $ <br/>
+		Productos:
+		<table>
+			<tr>
+				<th>Nombre</th>
+				<th>Precio</th>
+				<th>Unidades</th>
+			</tr>
+			<?php while ($producto = $productos->fetch_object()): ?>
+				<tr>
+					<td>
+						<a href="<?= base_url ?>producto/ver&id=<?= $producto->id ?>"><?= $producto->nombre ?></a>
+					</td>
+					<td>
+							<?=$producto->precio?>
+					</td>
+					<td>
+						<?= $producto->unidades ?>
+					</td>
+				</tr>
+			<?php endwhile; ?>
+		</table>
+		<?php
+		//Finalizamos la generación del HTML
+		$html = ob_get_contents();
+		ob_end_clean();
+		$mpdf = new \Mpdf\Mpdf();
+		$mpdf->WriteHTML($html);
+		$mpdf->SetTitle('Pedido de Camisetas');
+		$mpdf->Output();
 	}
 
 	// Fin Generar PDFS

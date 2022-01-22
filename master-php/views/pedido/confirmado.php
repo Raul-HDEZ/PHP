@@ -10,7 +10,7 @@
 
 		Número de pedido: <?= $pedido->id ?>   <br/>
 		Total a pagar: <?= $pedido->coste ?> $ <br/>
-		<a href="<?=base_url?>pedido/albaran" class="button button-delete orange">Generar PDF</a><br><br><br>
+		<a href="<?=base_url?>pedido/albaran&id=<?= $pedido->id ?>" target="_blank" class="button button-delete orange">Generar PDF</a><br><br><br>
 		Productos:
 
 		<table>

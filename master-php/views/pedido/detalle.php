@@ -16,22 +16,35 @@
 			<br/>
 		<?php endif; ?>
 
+		<a href="<?=base_url?>pedido/albaran&id=<?= $pedido->id ?>" target="_blank" class="button button-delete orange">Generar PDF</a><br><br><br>
+
 		<!--Añado los datos del cliente-->
-		<h3>Datos del Cliente</h3>
-		Id Usuario: <?= $usuario-> id ?>  <br/>
-		Nombre: <?= $usuario-> nombre." ". $usuario->apellidos ?>  <br/>
-		Email: <?= $usuario-> email ?>  <br/><br/>
+		<table>
+			<tr>
+				<td>
+					<h3>Datos del Cliente</h3>
+					Id Usuario: <?= $usuario-> id ?>  <br/>
+					Nombre: <?= $usuario-> nombre." ". $usuario->apellidos ?>  <br/>
+					Email: <?= $usuario-> email ?>  <br/><br/>
+				</td>
 
-		<h3>Dirección de envio</h3>
-		Provincia: <?= $pedido->provincia ?>   <br/>
-		Cuidad: <?= $pedido->localidad ?> <br/>
-		Direccion: <?= $pedido->direccion ?>   <br/><br/>
+				<td>
+					<h3>Dirección de envio</h3>
+					Provincia: <?= $pedido->provincia ?>   <br/>
+					Cuidad: <?= $pedido->localidad ?> <br/>
+					Direccion: <?= $pedido->direccion ?>   <br/><br/>
+				</td>
 
-		<h3>Datos del pedido:</h3>
-		Estado: <?=Utils::showStatus($pedido->estado)?> <br/>
-		Fecha: <?= $pedido->fecha ?> a las  <?= $pedido->hora ?> <br/>
-		Número de pedido: <?= $pedido->id ?>   <br/>
-		Total a pagar: <?= $pedido->coste ?> $ <br/>
+				<td>
+					<h3>Datos del pedido:</h3>
+					Estado: <?=Utils::showStatus($pedido->estado)?> <br/>
+					Fecha: <?= $pedido->fecha ?> a las  <?= $pedido->hora ?> <br/>
+					Número de pedido: <?= $pedido->id ?>   <br/>
+					Total a pagar: <?= $pedido->coste ?> $ <br/>
+				</td>
+			</tr>
+		</table>	
+
 		Productos:
 
 		<table>
