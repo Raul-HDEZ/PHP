@@ -107,6 +107,11 @@ class Producto{
 		$productos = $this->db->query("SELECT * FROM productos ORDER BY RAND() LIMIT $limit");
 		return $productos;
 	}
+
+	public function getPaginacion($limit, $offset){
+		$productos = $this->db->query("SELECT * FROM productos LIMIT $limit OFFSET $offset");
+		return $productos;
+	}
 	
 	public function getOne(){
 		$producto = $this->db->query("SELECT * FROM productos WHERE id = {$this->getId()}");

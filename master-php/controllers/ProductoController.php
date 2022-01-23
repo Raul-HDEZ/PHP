@@ -4,9 +4,28 @@ require_once 'models/Producto.php';
 class productoController{
 	
 	public function index(){
+		$db = Database::connect();
 		$producto = new Producto();
-		$productos = $producto->getRandom(6);
-	
+		$productosPorPagina = 6;
+		// Por defecto es la página 1; pero si está presente en la URL, tomamos esa
+		$pagina = 1;
+		if (isset($_GET["pagina"])) {
+			$pagina = $_GET["pagina"];
+		}
+		# El límite es el número de productos por página
+		$limit = $productosPorPagina;
+
+		# El offset es saltar X productos que viene dado por multiplicar la página - 1 * los productos por página
+		$offset = ($pagina - 1) * $productosPorPagina;
+
+		$sentencia = $db->query("SELECT count(*) AS conteo FROM productos");
+		$conteo = $sentencia->fetch_object()->conteo;
+
+		# Para obtener las páginas dividimos el conteo entre los productos por página, y redondeamos hacia arriba
+		$paginas = ceil($conteo / $productosPorPagina);
+
+		$productos = $producto->getPaginacion($limit, $offset);
+		
 		// renderizar vista
 		require_once 'views/producto/destacados.php';
 	}
