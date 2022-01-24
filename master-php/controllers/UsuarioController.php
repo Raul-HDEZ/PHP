@@ -209,6 +209,67 @@ class usuarioController{
 		header('Location:'.base_url.'Usuario/gestion');
 	}
 
-	
+	// Gestion de Usuarios
+
+	public function editarUsuario(){
+		Utils::isIdentity();
+		$usuario = new Usuario();
+		$usuario_id = $_SESSION['identity']->id;
+		$usuario->setId($usuario_id);
+		$usu = $usuario->getOne();
+
+
+		require_once './views/usuario/editardatos.php';
+	}
+
+	public function guardarcambios(){
+		if(isset($_POST)){
+			//$_SESSION['modificaciones'] = [];
+			$arrMod = [];
+
+			$nombre = empty($_POST['nombre']) ?  false : $_POST['nombre'];
+			$apellidos = empty($_POST['apellidos']) ? false : $_POST['apellidos'];
+			$email = empty($_POST['email']) ? false : $_POST['email'];
+			$direccion = empty($_POST['direccion']) ? false : $_POST['direccion'];
+			$password = empty($_POST['password']) ? false : $_POST['password'];
+			$conection = new Usuario();
+			$usuario_id = $_SESSION['identity']->id;
+			$conection->setId($usuario_id);
+			$usuario = $conection->getOne($usuario_id);
+
+			if($nombre && $nombre != $usuario->nombre){ $arrMod['nombre'] =$nombre; }
+			if($apellidos && $apellidos != $usuario->apellidos){ $arrMod['apellidos'] = $apellidos; }
+			if($email && $email != $usuario->email){
+				if($conection->checkEmail($email)){ $arrMod["email"] = $email; }
+			}
+			if($direccion && $direccion != $usuario->direccion){ $arrMod['direccion'] =$direccion; }
+			if($password && !empty($_POST['passwordN1']) && !empty($_POST['passwordN2'])){
+				if(password_verify($password, $usuario->password)  &&  $_POST['passwordN1'] == $_POST['passwordN2']){
+					$conection->setPassword($_POST['passwordN1']);
+					$arrMod['password'] = $conection->getPassword($email);
+				}
+			}	
+			$save = $conection->updateUsuario($arrMod);
+
+			if($save){
+				$_SESSION['userMod'] = "complete";
+				$usuario = new Usuario();
+				$usuario->setEmail($_POST['email']);
+				$usuario->setPassword($_POST['password']);
+
+				// Guardo los datos nuevos en la sesion 
+				$usuario = new Usuario();
+				$usuario->setEmail($_POST['email']);
+				$usuario->setPassword($_POST['password']);
+				$identity = $usuario->login();
+				$_SESSION['identity'] = $identity;
+			}else{
+				$_SESSION['userMod'] = "failed";
+			}
+		}else{
+			$_SESSION['userMod'] = "failed";
+		}
+		header("Location:".base_url.'usuario/editarUsuario');
+	}
 
 }

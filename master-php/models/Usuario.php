@@ -9,11 +9,16 @@ class Usuario{
 	private $rol;
 	private $imagen;
 	private $db;
+	private $direccion;
 	
 	public function __construct() {
 		$this->db = Database::connect();
 	}
 	
+	function getDireccion() {
+		return $this->direccion;
+	}
+
 	function getId() {
 		return $this->id;
 	}
@@ -40,6 +45,10 @@ class Usuario{
 
 	function getImagen() {
 		return $this->imagen;
+	}
+
+	function setDireccion($direccion) {
+		$this->direccion = $direccion;
 	}
 
 	function setId($id) {
@@ -71,7 +80,7 @@ class Usuario{
 	}
 
 	public function save(){
-		$sql = "INSERT INTO usuarios VALUES(NULL, '{$this->getNombre()}', '{$this->getApellidos()}', '{$this->getEmail()}', '{$this->getPassword()}', 'user', null);";
+		$sql = "INSERT INTO usuarios VALUES(NULL, '{$this->getNombre()}', '{$this->getApellidos()}', '{$this->getEmail()}', '{$this->getPassword()}', 'user', null, '{$this->getDireccion()}');";
 		$save = $this->db->query($sql);
 		
 		$result = false;
@@ -82,6 +91,7 @@ class Usuario{
 	}
 	
 	public function login(){
+
 		$result = false;
 		$email = $this->email;
 		$password = $this->password;
@@ -172,5 +182,32 @@ class Usuario{
 		$stmt->execute();
 		$result = $stmt->get_result();
 		return $result -> fetch_object();
+	}
+
+	public function checkEmail($email):bool{
+		$query = $this->db->query("SELECT * FROM `usuarios` WHERE email = '{$email}'");
+
+		if ($query->num_rows > 0) {
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	public function updateUsuario($arrMod){
+		$textSQL = "UPDATE usuarios SET ";
+		foreach($arrMod as $attribute => $value){
+			$textSQL .= $attribute." = '".$value."', ";
+		}
+		$textSQL = substr($textSQL, 0, -2);
+		$textSQL .= " WHERE id = ".$this->getId();
+
+		$save = $this->db->query($textSQL);
+		
+		$result = false;
+		if($save){
+			$result = true;
+		}
+		return $result;
 	}
 }

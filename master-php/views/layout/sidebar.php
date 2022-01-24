@@ -39,7 +39,7 @@
 				<li><a href="<?=base_url?>pedido/mis_pedidos">Mis pedidos</a></li>
 				<!-- Muestro la opcion de gestionar mis datos solo a usuarios normales	-->
 				<?php if(!isset($_SESSION['admin'])):?>
-					<li><a href="<?=base_url?>usuario/registro">Gestionar mis Datos</a></li>
+					<li><a href="<?=base_url?>usuario/editarUsuario">Gestionar mis Datos</a></li>
 				<?php endif; ?>
 				
 				<li><a href="<?=base_url?>usuario/logout">Cerrar sesión</a></li>
