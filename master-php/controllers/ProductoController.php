@@ -161,4 +161,20 @@ class productoController{
 		header('Location:'.base_url.'Producto/gestion');
 	}
 	
+	// Funcion extra
+
+	public function dashboard(){
+		$producto = new Producto();
+		$producto->setId(1);
+		$arr = $producto->getDashboardVentas();
+		
+
+		$camisetas = array_column($arr,0);
+		$ventas = array_column($arr,1);
+
+		$camisetas = json_encode($camisetas);
+		$ventas = json_encode($ventas);
+
+		require_once 'views/producto/dashboard.php';
+	}
 }

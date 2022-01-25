@@ -3,6 +3,8 @@
 <a href="<?=base_url?>producto/crear" class="button button-small">
 	Crear producto
 </a>
+<a href="<?=base_url?>producto/dashboard" class="button button-small orange">Dashboard</a>
+
 
 <?php if(isset($_SESSION['producto']) && $_SESSION['producto'] == 'complete'): ?>
 	<strong class="alert_green">El producto se ha creado correctamente</strong>

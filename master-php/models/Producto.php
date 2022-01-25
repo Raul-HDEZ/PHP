@@ -191,5 +191,21 @@ class Producto{
 		return $name['nombre'];
 	}
 
+	// Funcion extra
+
+	public function getDashboardVentas(){
+		$ventas = $this->db->query("SELECT producto_id, SUM(`unidades`)as total FROM `lineas_pedidos` Group BY `producto_id`");
+		$arr = $ventas->fetch_all();
+		for ($i=0; $i < count($arr); $i++) { 
+			$arr[$i][0] = self::getDashboardNombre($arr[$i][0]);
+		}
+		return $arr;
+	}
+
+	public function getDashboardNombre($id){
+		$nombre = $this->db->query("SELECT nombre FROM productos WHERE id=$id");
+		$var = $nombre->fetch_all();
+		return $var[0][0];
+	}
 	
 }

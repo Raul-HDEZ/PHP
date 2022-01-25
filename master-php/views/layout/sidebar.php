@@ -32,6 +32,7 @@
 				<li><a href="<?=base_url?>usuario/gestion">Gestionar usuarios</a></li>
 				<li><a href="<?=base_url?>categoria/index">Gestionar categorias</a></li>
 				<li><a href="<?=base_url?>producto/gestion">Gestionar productos</a></li>
+				<li><a href="<?=base_url?>producto/dashboard">Datos de ventas</a></li>
 				<li><a href="<?=base_url?>pedido/gestion">Gestionar pedidos</a></li>
 			<?php endif; ?>
 			
