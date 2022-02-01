@@ -20,29 +20,30 @@
 						<td><?=$product->precio?> $</td>
 					</tr>
 				</table>
-				<a href="<?= base_url ?>carrito/add&id=<?= $product->id ?>" class="orange button">Oferta - Comprar</a>
+				<a href="<?= base_url ?>carrito/add&id=<?= $product->id ?>" class="btn-info orange button">Oferta - Comprar</a>
 				<?php else :?>
 					<p><?=$product->precio?> $
-				<a href="<?= base_url ?>carrito/add&id=<?= $product->id ?>" class="button">Comprar</a>
+				<a href="<?= base_url ?>carrito/add&id=<?= $product->id ?>" class="button btn-sucess">Comprar</a>
 			<?php endif ?>
 		<?php else :?>
 			<!--Cambio el boton cuando no hay stock-->
 			<p><?=$product->precio?> $
-			<a href="" class="button-red">Sin Stock</a>
+			<a href="" class="button btn-danger">Sin Stock</a>
 		<?php endif ?>
 		</p>
 	</div>
 <?php endwhile; ?>
 
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<!--Paginacion-->
 
 	<nav>
     <div class="row">
-        <div class="col-xs-12 col-sm-6">
+        <div class="">
 
             <p>Mostrando <?php echo $productosPorPagina ?> de <?php echo $conteo ?> productos disponibles</p>
         </div>
-        <div class="col-xs-12 col-sm-6">
+        <div class="">
             <p>Página <?php echo $pagina ?> de <?php echo $paginas ?> </p>
         </div>
     </div>
